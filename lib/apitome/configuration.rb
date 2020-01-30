@@ -15,7 +15,9 @@ module Apitome
       :remote_docs,
       :remote_url,
       :url_formatter,
-      :precompile_assets
+      :precompile_assets,
+      :formatted_body_error_handler,
+      :example_error_handler,
     ]
 
     @@mount_at          = "/api/docs"
@@ -33,6 +35,8 @@ module Apitome
     @@remote_url        = nil
     @@url_formatter     = -> (str) { str.gsub(/\.json$/, '').underscore.gsub(/[^0-9a-z]+/i, '-') }
     @@precompile_assets = true
+    @@formatted_body_error_handler = nil
+    @@example_error_handler = nil
 
     def self.root=(path)
       @@root = Pathname.new(path.to_s) if path.present?
